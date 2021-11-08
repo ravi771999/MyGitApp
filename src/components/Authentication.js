@@ -1,7 +1,5 @@
 import React from 'react'
 import { useState , useEffect} from 'react'
-import Navbar from './Navbar';
-
 
 export default function Authentication() {
     const [email,setEmail]=useState("");

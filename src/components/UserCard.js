@@ -9,6 +9,7 @@ export default class UserCard extends Component {
         this.state={
             userData:{},
             userName:"ravi771999",
+            profileExists:true,
         }
     }
 
