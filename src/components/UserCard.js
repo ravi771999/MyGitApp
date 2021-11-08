@@ -15,7 +15,7 @@ export default class UserCard extends Component {
     async componentDidMount(){
         let response=await axios.get(`https://api.github.com/users/${this.state.userName}`);
         let data=response.data;
-        console.log(data);
+
         this.setState({
             userData:{...data},
         })
@@ -24,8 +24,6 @@ export default class UserCard extends Component {
     handleSearch=async (text)=>{
         let response=await axios.get(`https://api.github.com/users/${text}`);
         let data=response.data;
-        console.log(data);
-        // console.log(response.status);
 
         if(data == undefined){
             return;
