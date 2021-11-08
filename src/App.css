@@ -21,3 +21,40 @@
   align-items: center;
   justify-content: center;
 }
+
+.login-form{
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+form{
+  width: 30%;
+  border: 2px solid #1556a0;
+  padding: 35px
+}
+
+.navbar-left{
+  height: 100px;
+  width:40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-right{
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 50px;
+}
+
+.navbar-right button{
+  border-color: #1556a0;
+}
