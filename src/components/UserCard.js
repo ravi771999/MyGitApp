@@ -1,94 +1,63 @@
-import React, { Component } from 'react'
-
+import React, { useState , useEffect} from 'react'
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class UserCard extends Component {
+function UserCard(props) {
 
-    constructor(){
-        super();
-        this.state={
-            userData:{},
-            userName:"ravi771999",
-            profileExists:true,
+    useEffect(() => {
+        async function initalize(){
+            let response=null;
+            try{
+                response = await axios.get(`https://api.github.com/users/${props.userName}`);
+            }catch (err) {
+                        
+            }
+
+            if(response == null){
+                props.handleProfileExists();
+            }else
+                props.handleSearching(response.data);
         }
+        initalize();
+    },[]);
+
+    const handleSearch=()=>{
+        async function searchProfile(){
+            let response=null;
+            try{
+                response = await axios.get(`https://api.github.com/users/${props.userName}`);
+            }catch (err) {
+                
+            }
+
+            if(response == null){
+                props.handleProfileExists();
+            }else
+                props.handleSearching(response.data);
+        }
+        searchProfile();
     }
 
-    async componentDidMount(){
-        let response=null;
+    const userData=props.userData;
+    const profileExists=props.profileExists;
 
-        try{
-            response = await axios.get(`https://api.github.com/users/${this.state.userName}`);
-        }catch (err) {
-            
-        }
-
-        if(response == null){
-            this.setState({
-                profileExists:false,
-            })
-            return;
-        }
-
-        let data=response.data;
-
-        this.setState({
-            userData:{...data},
-        })
-    }
-
-    handleSearch=(text)=>{
-        this.setState({
-            userName:text,
-        })
-    }
-
-    handleSearching= async ()=>{
-        let response=null;
-
-        try{
-            response = await axios.get(`https://api.github.com/users/${this.state.userName}`);
-        }catch (err) {
-            
-        }
-
-        if(response == null){
-            this.setState({
-                profileExists:false,
-            })
-            return;
-        }
-
-        this.setState({
-            userData:{...response.data},
-            userName:"",
-            profileExists:true,
-        })
-    }
-
-    render() {
-
-        let userData= this.state.userData;
-
-        return (
+    return (
             <div className="main-card">
 
                 <div className="input-group flex-nowrap user-search" style={{width: "18rem"}}>
-                    <input type="text" className="form-control" placeholder="Enter The Username" aria-label="Username" aria-describedby="addon-wrapping" onChange={(e)=>this.handleSearch(e.target.value)}/>
-                    <button type="submit" class="btn btn-primary" onClick={()=>this.handleSearching()}>Submit</button>
+                    <input type="text" className="form-control" placeholder="Enter The Username" aria-label="Username" aria-describedby="addon-wrapping" onChange={(e)=>props.handleSearchText(e.target.value)}/>
+                    <button type="submit" class="btn btn-primary" onClick={()=>handleSearch()}>Submit</button>
+
                 </div>
                 {
-                    !this.state.profileExists?
+                    !profileExists?
                         <div className="profile-not-exists">
                             <div>**Profile does not exits**</div> 
                             <div>**Please search a valid github user**</div>
                         </div>
                     :<div className="user-card">
                             {
-                                userData==""?
-                                (<div className="spinner-border text-info" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                                </div>
-                                ):(
+                                userData != "" && (
                                     <div className="card" style={{width: "18rem"}}>
                                     <img src={userData.avatar_url} className="card-img-top" alt={userData.name}/>
                                     <div className="card-body">
@@ -123,6 +92,23 @@ export default class UserCard extends Component {
                     </div>
                 }
             </div>
-        )
+    )
+}
+
+const mapStateToProps= (state)=>{
+    return {
+        userData: state.userData,
+        userName: state.userName,
+        profileExists: state.profileExists,
     }
 }
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        handleSearching : (data)=>dispatch({type: "GET_SEARCHED_USER",payload:data}),
+        handleSearchText: (text)=>dispatch({type: "HANDLE_SEARCH_TEXT",payload: text}),
+        handleProfileExists: ()=>dispatch({type: "HANDLE_PROFILE_EXISTS"})
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserCard);
