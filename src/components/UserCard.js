@@ -9,6 +9,7 @@ export default class UserCard extends Component {
         this.state={
             userData:{},
             userName:"ravi771999",
+            profileExists:true,
         }
     }
 
@@ -21,17 +22,19 @@ export default class UserCard extends Component {
         })
     }
 
-    handleSearch=async (text)=>{
-        let response=await axios.get(`https://api.github.com/users/${text}`);
-        let data=response.data;
+    handleSearch=(text)=>{
+        this.setState({
+            userName:text,
+        })
+    }
 
-        if(data == undefined){
-            return;
-        }
+    handleSearching= async ()=>{
+        let response=await axios.get(`https://api.github.com/users/${this.state.userName}`);
+        let data=response.data;
 
         this.setState({
             userData:{...data},
-            userName:text,
+            userName:""
         })
     }
 
@@ -44,6 +47,7 @@ export default class UserCard extends Component {
 
                 <div className="input-group flex-nowrap user-search" style={{width: "18rem"}}>
                     <input type="text" className="form-control" placeholder="Enter The Username" aria-label="Username" aria-describedby="addon-wrapping" onChange={(e)=>this.handleSearch(e.target.value)}/>
+                    <button type="submit" class="btn btn-primary" onClick={()=>this.handleSearching()}>Submit</button>
                 </div>
 
                 <div className="user-card">
