@@ -7,7 +7,7 @@ export default function Authentication() {
     const [confirmPassword,setConfirmPassword]=useState("");
     const [isChecked,setIsChecked]=useState(false);
     const [isCheckedRegister,setIsCheckedRegister]=useState(false);
-    const [isRegistered,setIsRegistered]=useState(false);
+    const [isRegistered,setIsRegistered]=useState(true);
     const [validationMessage,setValidationMessage]=useState("");
 
     let handleCheck=()=>{
