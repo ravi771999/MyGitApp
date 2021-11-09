@@ -32,11 +32,7 @@ export default function Authentication() {
         <div>
             <div class="login-form">
                 {
-                    validationMessage==""?
-                    <div>
-
-                    </div>
-                    :<div className="error-validation">
+                    validationMessage != "" && <div className="error-validation">
                         **{validationMessage}**
                     </div>
                 }
