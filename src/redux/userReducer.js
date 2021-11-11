@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const intialState={
     userData:{},
     userName:"ravi771999",
