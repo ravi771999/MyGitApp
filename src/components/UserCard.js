@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios';
 import { connect } from 'react-redux';
 
@@ -12,13 +12,14 @@ function UserCard(props) {
             }catch (err) {
                         
             }
-
+            
             if(response == null){
                 props.handleProfileExists();
             }else
                 props.handleSearching(response.data);
         }
         initalize();
+        console.log(props);
     },[]);
 
     const handleSearch=()=>{
@@ -46,7 +47,7 @@ function UserCard(props) {
 
                 <div className="input-group flex-nowrap user-search" style={{width: "18rem"}}>
                     <input type="text" className="form-control" placeholder="Enter The Username" aria-label="Username" aria-describedby="addon-wrapping" onChange={(e)=>props.handleSearchText(e.target.value)}/>
-                    <button type="submit" class="btn btn-primary" onClick={()=>handleSearch()}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={()=>handleSearch()}>Submit</button>
 
                 </div>
                 {
@@ -97,9 +98,9 @@ function UserCard(props) {
 
 const mapStateToProps= (state)=>{
     return {
-        userData: state.userData,
-        userName: state.userName,
-        profileExists: state.profileExists,
+        userData: state.user.userData,
+        userName: state.user.userName,
+        profileExists: state.user.profileExists,
     }
 }
 
