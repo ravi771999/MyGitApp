@@ -58,3 +58,18 @@ form{
 .navbar-right button{
   border-color: #1556a0;
 }
+
+.error-validation{
+  font-size: 17px;;
+  padding-bottom: 10px;
+  color:rgb(209, 9, 9);
+}
+
+.profile-not-exists{
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  justify-content: center;
+  align-items: center;
+  color:rgb(209, 9, 9);
+}
