@@ -94,3 +94,11 @@ form{
   align-items: center;
   justify-content: center;
 }
+
+.not-found-error{
+  color: rgb(212, 36, 36);
+  margin-top: 100px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}

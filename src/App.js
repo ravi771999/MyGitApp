@@ -12,6 +12,7 @@ import UserCard from './components/UserCard';
 import Authentication from './components/Authentication';
 import store from "./redux/store";
 import Profile from "./components/Profile";
+import NotFound from "./components/NotFound"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<UserCard/>} />
               <Route path="/login" element={<Authentication/>} />
               <Route path="/profile" element={<Profile/>} />
+              <Route path="/*" element={<NotFound/>} />
             </Routes>
       </Router>
     </Provider>
