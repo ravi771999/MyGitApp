@@ -58,3 +58,11 @@ form{
 .navbar-right button{
   border-color: #1556a0;
 }
+
+.not-found-error{
+  color: rgb(212, 36, 36);
+  margin-top: 100px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}

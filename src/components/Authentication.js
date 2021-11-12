@@ -10,11 +10,11 @@ export default function Authentication() {
     const [isRegistered,setIsRegistered]=useState(false);
     const [validationMessage,setValidationMessage]=useState("");
 
-    let handleCheck=()=>{
+    let handleCheck = ()=> {
         setIsChecked(!isChecked);
     }
 
-    let handleCheckRegister=()=>{
+    let handleCheckRegister = () => {
         if(!isCheckedRegister){
             //check email is valid
             if(password == confirmPassword){
