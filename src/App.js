@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter , Routes , Route} from "react-router-dom";
 
 import { Provider } from "react-redux";
 
@@ -17,7 +13,7 @@ import NotFound from "./components/NotFound"
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
           <Navbar/>
             <Routes>
               <Route path="/" element={<UserCard/>} />
@@ -25,7 +21,7 @@ function App() {
               <Route path="/profile" element={<Profile/>} />
               <Route path="/*" element={<NotFound/>} />
             </Routes>
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
 }
