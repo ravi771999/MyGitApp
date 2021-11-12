@@ -19,7 +19,7 @@ export default class UserCard extends Component {
         try{
             response = await axios.get(`https://api.github.com/users/${this.state.userName}`);
         }catch (err) {
-            
+
         }
 
         if(response == null){
@@ -110,7 +110,7 @@ export default class UserCard extends Component {
                                             </div>
                                         </li>
                                         {
-                                            userData["email"] == undefined? <div></div> :<li className="list-group-item">Email ID: {userData}</li>
+                                            userData["email"] != undefined && <li className="list-group-item">Email ID: {userData}</li>
                                         }
                                     </ul>
                                     <div className="card-body card-links">

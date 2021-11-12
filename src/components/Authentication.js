@@ -32,11 +32,7 @@ export default function Authentication() {
         <div>
             <div class="login-form">
                 {
-                    validationMessage==""?
-                    <div>
-
-                    </div>
-                    :<div className="error-validation">
+                    validationMessage != "" && <div className="error-validation">
                         **{validationMessage}**
                     </div>
                 }
@@ -76,7 +72,7 @@ export default function Authentication() {
                     <form>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" onChange={(e)=>setEmail(e.target.value)} required={true}/>
+                            <input type="email" class="form-control" id="email" onChange={(e)=>setEmail(e.target.value)} required={true}/>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
