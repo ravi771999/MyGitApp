@@ -15,6 +15,9 @@ const userReducer = (state=intialState,action)=>{
         case "HANDLE_PROFILE_EXISTS":{
             return {...state,profileExists:false};
         }
+        case "SEARCH_NOT_FOUND":{
+            return {...state,...intialState};
+        }
         default: 
             return state;
     }

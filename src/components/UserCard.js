@@ -8,9 +8,12 @@ function UserCard(props) {
         async function initalize(){
             let response=null;
             try{
-                response = await axios.get(`https://api.github.com/users/${props.userName}`);
+                response = await axios.get(`https://api.github.com/users/${props.userName}`,{auth:{
+                    username:props.loginUser,
+                    password:props.password
+                }});
             }catch (err) {
-                        
+                props.handleNotFound();
             }
             
             if(response == null){
@@ -19,16 +22,18 @@ function UserCard(props) {
                 props.handleSearching(response.data);
         }
         initalize();
-        console.log(props);
     },[]);
 
     const handleSearch=()=>{
         async function searchProfile(){
             let response=null;
             try{
-                response = await axios.get(`https://api.github.com/users/${props.userName}`);
+                response = await axios.get(`https://api.github.com/users/${props.userName}`,{auth:{
+                    username:props.loginUser,
+                    password:props.password
+                }});
             }catch (err) {
-                
+                props.handleNotFound();
             }
 
             if(response == null){
@@ -101,6 +106,8 @@ const mapStateToProps= (state)=>{
         userData: state.user.userData,
         userName: state.user.userName,
         profileExists: state.user.profileExists,
+        loginUser: state.login.userData.login,
+        password: state.login.password
     }
 }
 
@@ -108,7 +115,8 @@ const mapDispatchToProps=(dispatch)=>{
     return {
         handleSearching : (data)=>dispatch({type: "GET_SEARCHED_USER",payload:data}),
         handleSearchText: (text)=>dispatch({type: "HANDLE_SEARCH_TEXT",payload: text}),
-        handleProfileExists: ()=>dispatch({type: "HANDLE_PROFILE_EXISTS"})
+        handleProfileExists: ()=>dispatch({type: "HANDLE_PROFILE_EXISTS"}),
+        handleNotFound: ()=>dispatch({type:"SEARCH_NOT_FOUND"})
     }
 }
 

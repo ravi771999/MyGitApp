@@ -20,6 +20,12 @@ export const loginErr=(err)=>{
     }
 }
 
+export const logout=()=>{
+    return{
+        type:"LOGOUT",
+    }
+}
+
 export const loginUserr=(creds)=>{
     return async (dispatch)=>{
         dispatch(loginReq());
@@ -28,9 +34,17 @@ export const loginUserr=(creds)=>{
                 username:creds.username,
                 password:creds.password
             }})
-            dispatch(loginSuc(res))
+            localStorage.setItem("login_info",JSON.stringify(res.data));
+            dispatch(loginSuc({userData:res,password:creds.password}))
         }catch(err){
             dispatch(loginErr(err))
         }     
+    }
+}
+
+export const logoutUserr=()=>{
+    return (dispatch)=>{
+        localStorage.removeItem("login_info");
+        dispatch(logout());
     }
 }
