@@ -13,8 +13,8 @@ export default class UserCard extends Component {
     }
 
     async componentDidMount(){
-        let response=await axios.get(`https://api.github.com/users/${this.state.userName}`);
-        let data=response.data;
+        const response=await axios.get(`https://api.github.com/users/${this.state.userName}`);
+        const data=response.data;
 
         this.setState({
             userData:{...data},
@@ -22,12 +22,8 @@ export default class UserCard extends Component {
     }
 
     handleSearch=async (text)=>{
-        let response=await axios.get(`https://api.github.com/users/${text}`);
-        let data=response.data;
-
-        if(data == undefined){
-            return;
-        }
+        const response=await axios.get(`https://api.github.com/users/${text}`);
+        const data=response.data;
 
         this.setState({
             userData:{...data},
@@ -36,13 +32,12 @@ export default class UserCard extends Component {
     }
 
     render() {
-
-        let userData= this.state.userData;
+        const userData= this.state.userData;
 
         return (
             <div className="main-card">
 
-                <div className="input-group flex-nowrap user-search" style={{width: "18rem"}}>
+                <div className="input-group flex-nowrap user-search">
                     <input type="text" className="form-control" placeholder="Enter The Username" aria-label="Username" aria-describedby="addon-wrapping" onChange={(e)=>this.handleSearch(e.target.value)}/>
                 </div>
 
